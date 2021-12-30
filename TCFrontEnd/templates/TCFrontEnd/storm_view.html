@@ -1,0 +1,45 @@
+{% extends "wwlln/base.html" %}
+
+{% block title %}{{ storm.name }}{% endblock title %}
+
+{% block header %}
+{% load staticfiles %}
+{% load storms_filters %}
+{% endblock header %}
+
+{% block body %}
+
+<div class="container-fluid">
+  <center>
+    <h1>
+    {{ storm.name }}
+    <br><small>{{ storm.date_start }} to {{ storm.date_end }}</small>
+    <br><small>Duration: {{ storm.date_end|timeuntil:storm.date_start }}</small>
+    <br><small>Number of Track Records: {{ storm.stormtrack_set.all|length }}</small>
+    </h1>
+  </center>
+</div>
+<hr/>
+<div class="container">
+  <div class="panel-group">
+    {% for product in products %}
+      {% product_panel storm product %}
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock body %}
+
+
+{% block footer %}
+<script src="{% static 'storms/wwlln/js/collapse_panel_icon.js' %}"></script>
+<script>
+  $(document).ready(function () {
+      /* Make sure that the image carousels don't autmatically change. */
+    $('.carousel').carousel('pause');
+    $('.carousel-control').click(function () {
+        $('.carousel').carousel('pause');
+    });
+  });
+</script>
+{% endblock footer %}

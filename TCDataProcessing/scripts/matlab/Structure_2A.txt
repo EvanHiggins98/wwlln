@@ -1,0 +1,405 @@
+Datasets in /HS/CSF are:
+  24 x 7935 x    1  int16 | binBBBottom
+  24 x 7935 x    1  int16 | binBBPeak
+  24 x 7935 x    1  int16 | binBBTop
+  24 x 7935 x    1  int16 | binDFRmMLBottom
+  24 x 7935 x    1  int16 | binDFRmMLTop
+  24 x 7935 x    1  int32 | flagBB
+  24 x 7935 x    1   int8 | flagHeavyIcePrecip
+  24 x 7935 x    1  int32 | flagShallowRain
+  24 x 7935 x    1 single | heightBB
+  24 x 7935 x    1  int32 | qualityBB
+  24 x 7935 x    1  int32 | qualityTypePrecip
+  24 x 7935 x    1  int32 | typePrecip
+  24 x 7935 x    1 single | widthBB
+Datasets in /HS/DSD are:
+   5 x   24 x 7935  int16 | binNode
+  88 x   24 x 7935  uint8 | phase
+Datasets in /HS/Experimental are:
+  24 x 7935 x    1  int16 | binDEML2
+  24 x 7935 x    1 single | precipRateESurface2
+  24 x 7935 x    1  uint8 | precipRateESurface2Status
+  24 x 7935 x    1 single | seaIceConcentration
+   5 x   24 x 7935 single | sigmaZeroProfile
+Datasets in /HS/FLG are:
+  88 x   24 x 7935   int8 | flagEcho
+7935 x    1 x    1  int16 | flagScanPattern
+7935 x    1 x    1   int8 | flagSensor
+  24 x 7935 x    1  int32 | qualityData
+  24 x 7935 x    1   int8 | qualityFlag
+Datasets in /HS/PRE are:
+  24 x 7935 x    1 single | adjustFactor
+  24 x 7935 x    1  int16 | binClutterFreeBottom
+  24 x 7935 x    1  int16 | binRealSurface
+  24 x 7935 x    1  int16 | binStormTop
+  24 x 7935 x    1 single | elevation
+  24 x 7935 x    1 single | ellipsoidBinOffset
+  24 x 7935 x    1  int32 | flagPrecip
+  24 x 7935 x    1  uint8 | flagSigmaZeroSaturation
+  24 x 7935 x    1 single | heightStormTop
+  24 x 7935 x    1  int32 | landSurfaceType
+  24 x 7935 x    1 single | localZenithAngle
+  24 x 7935 x    1 single | sigmaZeroMeasured
+  24 x 7935 x    1 single | snRatioAtRealSurface
+  24 x 7935 x    1   int8 | snowIceCover
+  88 x   24 x 7935 single | zFactorMeasured
+Datasets in /HS/SLV are:
+  24 x 7935 x    1  int16 | binEchoBottom
+  88 x   24 x 7935 single | epsilon
+  88 x   24 x 7935   int8 | flagSLV
+   2 x   88 x   24 single | paramDSD
+   3 x   24 x 7935 single | paramNUBF
+  24 x 7935 x    1  uint8 | phaseNearSurface
+  24 x 7935 x    1 single | piaFinal
+  88 x   24 x 7935 single | precipRate
+  24 x 7935 x    1 single | precipRateAve24
+  24 x 7935 x    1 single | precipRateESurface
+  24 x 7935 x    1 single | precipRateNearSurface
+   2 x   24 x 7935 single | precipWaterIntegrated
+  24 x 7935 x    1  int32 | qualitySLV
+  24 x 7935 x    1 single | sigmaZeroCorrected
+  88 x   24 x 7935 single | zFactorCorrected
+  24 x 7935 x    1 single | zFactorCorrectedESurface
+  24 x 7935 x    1 single | zFactorCorrectedNearSurface
+Datasets in /HS/SRT are:
+   6 x   24 x 7935 single | PIAalt
+  24 x 7935 x    1 single | PIAhb
+  24 x 7935 x    1 single | PIAhybrid
+   6 x   24 x 7935 single | PIAweight
+   6 x   24 x 7935 single | RFactorAlt
+  24 x 7935 x    1 single | pathAtten
+   2 x    2 x   24  int16 | refScanID
+  24 x 7935 x    1 single | reliabFactor
+  24 x 7935 x    1 single | reliabFactorHY
+  24 x 7935 x    1  int16 | reliabFlag
+  24 x 7935 x    1  int16 | reliabFlagHY
+   3 x   24 x 7935 single | stddevEff
+  24 x 7935 x    1 single | stddevHY
+  24 x 7935 x    1 single | zeta
+Datasets in /HS/ScanTime are:
+7935 x    1 x    1   int8 | DayOfMonth
+7935 x    1 x    1  int16 | DayOfYear
+7935 x    1 x    1   int8 | Hour
+7935 x    1 x    1  int16 | MilliSecond
+7935 x    1 x    1   int8 | Minute
+7935 x    1 x    1   int8 | Month
+7935 x    1 x    1   int8 | Second
+7935 x    1 x    1 double | SecondOfDay
+7935 x    1 x    1  int16 | Year
+Datasets in /HS/VER are:
+  88 x   24 x 7935 single | attenuationNP
+  24 x 7935 x    1  int16 | binZeroDeg
+  24 x 7935 x    1 single | heightZeroDeg
+   4 x   24 x 7935 single | piaNP
+  24 x 7935 x    1 single | sigmaZeroNPCorrected
+Datasets in /HS/navigation are:
+7935 x    1 x    1 single | dprAlt
+7935 x    1 x    1 single | greenHourAng
+7935 x    1 x    1 single | scAlt
+7935 x    1 x    1 single | scAttPitchGeoc
+7935 x    1 x    1 single | scAttPitchGeod
+7935 x    1 x    1 single | scAttRollGeoc
+7935 x    1 x    1 single | scAttRollGeod
+7935 x    1 x    1 single | scAttYawGeoc
+7935 x    1 x    1 single | scAttYawGeod
+7935 x    1 x    1 single | scLat
+7935 x    1 x    1 single | scLon
+   3 x 7935 x    1 single | scPos
+   3 x 7935 x    1 single | scVel
+7935 x    1 x    1 double | timeMidScan
+7935 x    1 x    1 double | timeMidScanOffset
+Datasets in /HS/scanStatus are:
+7935 x    1 x    1 double | FractionalGranuleNumber
+7935 x    1 x    1  int16 | SCorientation
+7935 x    1 x    1   int8 | acsModeMidScan
+7935 x    1 x    1   int8 | dataQuality
+7935 x    1 x    1   int8 | dataWarning
+7935 x    1 x    1  int16 | geoError
+7935 x    1 x    1  int16 | geoWarning
+7935 x    1 x    1   int8 | limitErrorFlag
+7935 x    1 x    1   int8 | missing
+7935 x    1 x    1   int8 | modeStatus
+7935 x    1 x    1   int8 | operationalMode
+7935 x    1 x    1  int16 | pointingStatus
+7935 x    1 x    1   int8 | targetSelectionMidScan
+Datasets in /HS are:
+  24 x 7935 x    1 single | Latitude
+  24 x 7935 x    1 single | Longitude
+Datasets in /MS/CSF are:
+  25 x 7935 x    1  int16 | binBBBottom
+  25 x 7935 x    1  int16 | binBBPeak
+  25 x 7935 x    1  int16 | binBBTop
+  25 x 7935 x    1  int16 | binDFRmMLBottom
+  25 x 7935 x    1  int16 | binDFRmMLTop
+  25 x 7935 x    1  int32 | flagBB
+  25 x 7935 x    1   int8 | flagHeavyIcePrecip
+  25 x 7935 x    1  int32 | flagShallowRain
+  25 x 7935 x    1 single | heightBB
+  25 x 7935 x    1  int32 | qualityBB
+  25 x 7935 x    1  int32 | qualityTypePrecip
+  25 x 7935 x    1  int32 | typePrecip
+  25 x 7935 x    1 single | widthBB
+Datasets in /MS/DSD are:
+   5 x   25 x 7935  int16 | binNode
+Datasets in /MS/Experimental are:
+  25 x 7935 x    1  int16 | binDEML2
+  25 x 7935 x    1  uint8 | flagSurfaceSnowfall
+  25 x 7935 x    1 single | precipRateESurface2
+  25 x 7935 x    1  uint8 | precipRateESurface2Status
+  25 x 7935 x    1 single | seaIceConcentration
+   7 x   25 x 7935 single | sigmaZeroProfile
+  25 x 7935 x    1 single | surfaceSnowfallIndex
+Datasets in /MS/FLG are:
+ 176 x   25 x 7935   int8 | flagEcho
+7935 x    1 x    1  int16 | flagScanPattern
+7935 x    1 x    1   int8 | flagSensor
+  25 x 7935 x    1  int32 | qualityData
+  25 x 7935 x    1   int8 | qualityFlag
+Datasets in /MS/PRE are:
+  25 x 7935 x    1 single | adjustFactor
+  25 x 7935 x    1  int16 | binClutterFreeBottom
+  25 x 7935 x    1  int16 | binRealSurface
+  25 x 7935 x    1  int16 | binStormTop
+  25 x 7935 x    1 single | elevation
+  25 x 7935 x    1 single | ellipsoidBinOffset
+  25 x 7935 x    1  int32 | flagPrecip
+  25 x 7935 x    1  uint8 | flagSigmaZeroSaturation
+  25 x 7935 x    1 single | heightStormTop
+  25 x 7935 x    1  int32 | landSurfaceType
+  25 x 7935 x    1 single | localZenithAngle
+  25 x 7935 x    1 single | sigmaZeroMeasured
+  25 x 7935 x    1 single | snRatioAtRealSurface
+  25 x 7935 x    1   int8 | snowIceCover
+ 176 x   25 x 7935 single | zFactorMeasured
+Datasets in /MS/SLV are:
+  25 x 7935 x    1  int16 | binEchoBottom
+ 176 x   25 x 7935 single | epsilon
+   3 x   25 x 7935 single | paramNUBF
+  25 x 7935 x    1  uint8 | phaseNearSurface
+  25 x 7935 x    1 single | piaFinal
+  25 x 7935 x    1 single | precipRateAve24
+  25 x 7935 x    1 single | precipRateESurface
+  25 x 7935 x    1 single | precipRateNearSurface
+   2 x   25 x 7935 single | precipWaterIntegrated
+  25 x 7935 x    1 single | sigmaZeroCorrected
+ 176 x   25 x 7935 single | zFactorCorrected
+  25 x 7935 x    1 single | zFactorCorrectedESurface
+  25 x 7935 x    1 single | zFactorCorrectedNearSurface
+Datasets in /MS/SRT are:
+   6 x   25 x 7935 single | PIAalt
+  25 x 7935 x    1 single | PIAhb
+  25 x 7935 x    1 single | PIAhybrid
+   6 x   25 x 7935 single | PIAweight
+   6 x   25 x 7935 single | RFactorAlt
+  25 x 7935 x    1 single | pathAtten
+   2 x    2 x   25  int16 | refScanID
+  25 x 7935 x    1 single | reliabFactor
+  25 x 7935 x    1 single | reliabFactorHY
+  25 x 7935 x    1  int16 | reliabFlag
+  25 x 7935 x    1  int16 | reliabFlagHY
+   3 x   25 x 7935 single | stddevEff
+  25 x 7935 x    1 single | stddevHY
+  25 x 7935 x    1 single | zeta
+Datasets in /MS/ScanTime are:
+7935 x    1 x    1   int8 | DayOfMonth
+7935 x    1 x    1  int16 | DayOfYear
+7935 x    1 x    1   int8 | Hour
+7935 x    1 x    1  int16 | MilliSecond
+7935 x    1 x    1   int8 | Minute
+7935 x    1 x    1   int8 | Month
+7935 x    1 x    1   int8 | Second
+7935 x    1 x    1 double | SecondOfDay
+7935 x    1 x    1  int16 | Year
+Datasets in /MS/TRG are:
+  13 x   25 x 7935  int16 | MSbreakpoints
+  25 x 7935 x    1  uint8 | MSindexKa
+  25 x 7935 x    1  uint8 | MSindexKu
+  25 x 7935 x    1  uint8 | MSkneeDFRindex
+   4 x   25 x 7935  uint8 | MSlowSNRrangeFilter
+   6 x   25 x 7935 single | MSslopeFits
+  13 x   25 x 7935 single | MSslopePoints
+  10 x   25 x 7935 single | MSslopes
+  25 x 7935 x    1  uint8 | MSsurfPeakIndexKa
+  25 x 7935 x    1  uint8 | MSsurfPeakIndexKu
+  25 x 7935 x    1  uint8 | MSthrZindex
+  25 x 7935 x    1  uint8 | MSthroughsurfIndexKa
+  25 x 7935 x    1  uint8 | MSthroughsurfIndexKu
+   2 x   25 x 7935 single | NUBFcorrPIA
+  25 x 7935 x    1  uint8 | NUBFindex
+   3 x   25 x 7935  uint8 | NUBFnZkVarIndex
+  25 x 7935 x    1  int16 | NUBFnZkVarScaling
+   3 x   25 x 7935  uint8 | NUBFnZmVarIndex
+  25 x 7935 x    1  int16 | NUBFnZmVarScaling
+  30 x   25 x 7935 single | NUBFprofZPC
+  25 x 7935 x    1  uint8 | NUBFratioPIAindex
+  30 x   25 x 7935 single | NUBFsurfSliceIndex
+  25 x 7935 x    1 single | RNUBFcond
+   3 x   25 x 7935  uint8 | precipFrac
+   8 x   25 x 7935 single | triggerParameters
+Datasets in /MS/VER are:
+ 176 x   25 x 7935 single | attenuationNP
+  25 x 7935 x    1  int16 | binZeroDeg
+  25 x 7935 x    1 single | heightZeroDeg
+   4 x   25 x 7935 single | piaNP
+  25 x 7935 x    1 single | sigmaZeroNPCorrected
+Datasets in /MS/navigation are:
+7935 x    1 x    1 single | dprAlt
+7935 x    1 x    1 single | greenHourAng
+7935 x    1 x    1 single | scAlt
+7935 x    1 x    1 single | scAttPitchGeoc
+7935 x    1 x    1 single | scAttPitchGeod
+7935 x    1 x    1 single | scAttRollGeoc
+7935 x    1 x    1 single | scAttRollGeod
+7935 x    1 x    1 single | scAttYawGeoc
+7935 x    1 x    1 single | scAttYawGeod
+7935 x    1 x    1 single | scLat
+7935 x    1 x    1 single | scLon
+   3 x 7935 x    1 single | scPos
+   3 x 7935 x    1 single | scVel
+7935 x    1 x    1 double | timeMidScan
+7935 x    1 x    1 double | timeMidScanOffset
+Datasets in /MS/scanStatus are:
+7935 x    1 x    1 double | FractionalGranuleNumber
+7935 x    1 x    1  int16 | SCorientation
+7935 x    1 x    1   int8 | acsModeMidScan
+7935 x    1 x    1   int8 | dataQuality
+7935 x    1 x    1   int8 | dataWarning
+7935 x    1 x    1  int16 | geoError
+7935 x    1 x    1  int16 | geoWarning
+7935 x    1 x    1   int8 | limitErrorFlag
+7935 x    1 x    1   int8 | missing
+7935 x    1 x    1   int8 | modeStatus
+7935 x    1 x    1   int8 | operationalMode
+7935 x    1 x    1  int16 | pointingStatus
+7935 x    1 x    1   int8 | targetSelectionMidScan
+Datasets in /MS are:
+  25 x 7935 x    1 single | Latitude
+  25 x 7935 x    1 single | Longitude
+Datasets in /NS/CSF are:
+  49 x 7935 x    1  int16 | binBBBottom
+  49 x 7935 x    1  int16 | binBBPeak
+  49 x 7935 x    1  int16 | binBBTop
+  49 x 7935 x    1   int8 | flagAnvil
+  49 x 7935 x    1  int32 | flagBB
+  49 x 7935 x    1   int8 | flagHeavyIcePrecip
+  49 x 7935 x    1  int32 | flagShallowRain
+  49 x 7935 x    1 single | heightBB
+  49 x 7935 x    1  int32 | qualityBB
+  49 x 7935 x    1  int32 | qualityTypePrecip
+  49 x 7935 x    1  int32 | typePrecip
+  49 x 7935 x    1 single | widthBB
+Datasets in /NS/DSD are:
+   5 x   49 x 7935  int16 | binNode
+ 176 x   49 x 7935  uint8 | phase
+Datasets in /NS/Experimental are:
+  49 x 7935 x    1  int16 | binDEML2
+  49 x 7935 x    1 single | precipRateESurface2
+  49 x 7935 x    1  uint8 | precipRateESurface2Status
+  49 x 7935 x    1 single | seaIceConcentration
+   7 x   49 x 7935 single | sigmaZeroProfile
+Datasets in /NS/FLG are:
+ 176 x   49 x 7935   int8 | flagEcho
+7935 x    1 x    1  int16 | flagScanPattern
+7935 x    1 x    1   int8 | flagSensor
+  49 x 7935 x    1  int32 | qualityData
+  49 x 7935 x    1   int8 | qualityFlag
+Datasets in /NS/PRE are:
+  49 x 7935 x    1 single | adjustFactor
+  49 x 7935 x    1  int16 | binClutterFreeBottom
+  49 x 7935 x    1  int16 | binRealSurface
+  49 x 7935 x    1  int16 | binStormTop
+  49 x 7935 x    1 single | elevation
+  49 x 7935 x    1 single | ellipsoidBinOffset
+  49 x 7935 x    1  int32 | flagPrecip
+  49 x 7935 x    1  uint8 | flagSigmaZeroSaturation
+  49 x 7935 x    1 single | heightStormTop
+  49 x 7935 x    1  int32 | landSurfaceType
+  49 x 7935 x    1 single | localZenithAngle
+  49 x 7935 x    1 single | sigmaZeroMeasured
+  49 x 7935 x    1 single | snRatioAtRealSurface
+  49 x 7935 x    1   int8 | snowIceCover
+ 176 x   49 x 7935 single | zFactorMeasured
+Datasets in /NS/SLV are:
+  49 x 7935 x    1  int16 | binEchoBottom
+ 176 x   49 x 7935 single | epsilon
+ 176 x   49 x 7935   int8 | flagSLV
+   2 x  176 x   49 single | paramDSD
+   3 x   49 x 7935 single | paramNUBF
+  49 x 7935 x    1  uint8 | phaseNearSurface
+  49 x 7935 x    1 single | piaFinal
+ 176 x   49 x 7935 single | precipRate
+  49 x 7935 x    1 single | precipRateAve24
+  49 x 7935 x    1 single | precipRateESurface
+  49 x 7935 x    1 single | precipRateNearSurface
+   2 x   49 x 7935 single | precipWaterIntegrated
+  49 x 7935 x    1  int32 | qualitySLV
+  49 x 7935 x    1 single | sigmaZeroCorrected
+ 176 x   49 x 7935 single | zFactorCorrected
+  49 x 7935 x    1 single | zFactorCorrectedESurface
+  49 x 7935 x    1 single | zFactorCorrectedNearSurface
+Datasets in /NS/SRT are:
+   6 x   49 x 7935 single | PIAalt
+  49 x 7935 x    1 single | PIAhb
+  49 x 7935 x    1 single | PIAhybrid
+   6 x   49 x 7935 single | PIAweight
+   6 x   49 x 7935 single | RFactorAlt
+  49 x 7935 x    1 single | pathAtten
+   2 x    2 x   49  int16 | refScanID
+  49 x 7935 x    1 single | reliabFactor
+  49 x 7935 x    1 single | reliabFactorHY
+  49 x 7935 x    1  int16 | reliabFlag
+  49 x 7935 x    1  int16 | reliabFlagHY
+   3 x   49 x 7935 single | stddevEff
+  49 x 7935 x    1 single | stddevHY
+  49 x 7935 x    1 single | zeta
+Datasets in /NS/ScanTime are:
+7935 x    1 x    1   int8 | DayOfMonth
+7935 x    1 x    1  int16 | DayOfYear
+7935 x    1 x    1   int8 | Hour
+7935 x    1 x    1  int16 | MilliSecond
+7935 x    1 x    1   int8 | Minute
+7935 x    1 x    1   int8 | Month
+7935 x    1 x    1   int8 | Second
+7935 x    1 x    1 double | SecondOfDay
+7935 x    1 x    1  int16 | Year
+Datasets in /NS/VER are:
+ 176 x   49 x 7935 single | attenuationNP
+  49 x 7935 x    1  int16 | binZeroDeg
+  49 x 7935 x    1 single | heightZeroDeg
+   4 x   49 x 7935 single | piaNP
+  49 x 7935 x    1 single | sigmaZeroNPCorrected
+Datasets in /NS/navigation are:
+7935 x    1 x    1 single | dprAlt
+7935 x    1 x    1 single | greenHourAng
+7935 x    1 x    1 single | scAlt
+7935 x    1 x    1 single | scAttPitchGeoc
+7935 x    1 x    1 single | scAttPitchGeod
+7935 x    1 x    1 single | scAttRollGeoc
+7935 x    1 x    1 single | scAttRollGeod
+7935 x    1 x    1 single | scAttYawGeoc
+7935 x    1 x    1 single | scAttYawGeod
+7935 x    1 x    1 single | scLat
+7935 x    1 x    1 single | scLon
+   3 x 7935 x    1 single | scPos
+   3 x 7935 x    1 single | scVel
+7935 x    1 x    1 double | timeMidScan
+7935 x    1 x    1 double | timeMidScanOffset
+Datasets in /NS/scanStatus are:
+7935 x    1 x    1 double | FractionalGranuleNumber
+7935 x    1 x    1  int16 | SCorientation
+7935 x    1 x    1   int8 | acsModeMidScan
+7935 x    1 x    1   int8 | dataQuality
+7935 x    1 x    1   int8 | dataWarning
+7935 x    1 x    1  int16 | geoError
+7935 x    1 x    1  int16 | geoWarning
+7935 x    1 x    1   int8 | limitErrorFlag
+7935 x    1 x    1   int8 | missing
+7935 x    1 x    1   int8 | modeStatus
+7935 x    1 x    1   int8 | operationalMode
+7935 x    1 x    1  int16 | pointingStatus
+7935 x    1 x    1   int8 | targetSelectionMidScan
+Datasets in /NS are:
+  49 x 7935 x    1 single | Latitude
+  49 x 7935 x    1 single | Longitude
+Datasets in / are:
+   1 x    1 x    1   cell | AlgorithmRuntimeInfo

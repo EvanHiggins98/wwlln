@@ -1,0 +1,23 @@
+<div class="container panel-group panel-nested">
+  {% for year, regions in storms.storms_by_year_and_region %}
+    <div class="panel panel-default">
+      <div class="panel-heading" href="#{{ group_years }}"></div>
+      <div id="{{ group_years }}" class="panel-collapse panel-group collapse">
+        {% for region, storm_entries in regions %}
+          <div class="panel panel-default">
+            <div class="panel-heading" href="#{{ group_regions }}"></div>
+            <div id="{{ group_regions }}" class="panel-collapse collapse"> </div>
+          </div>         {# </div class="panel panel-default"> #}
+        {% endfor %}   {# End: loop through all regions for year #}
+      </div>         {# </div id="{{ group_years }}" class="panel-collapse panel-group collapse"> #}
+    </div>         {# </div class="panel panel-default"> #}
+  {% endfor %}   {# End: loop through all years #}
+</div>         {# </div class="container panel-group panel-nested"> #}
+
+panel-group panel-nested
+  panel
+    panel-heading
+    panel-collapse panel-group collapse
+      panel panel-default
+        panel-heading
+        panel-collapse collapse

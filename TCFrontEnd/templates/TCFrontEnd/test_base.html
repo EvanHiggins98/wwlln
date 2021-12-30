@@ -1,0 +1,21 @@
+{% load staticfiles %}
+
+<p>TEST_BASE.html</p>
+
+{% include "storms/test_include.html" %}
+
+{% if test_empty_list %}
+  <p>Variable "test_empty_list" is present!</p>
+{% else %}
+  <p>Variable "test_empty_list" is <b>NOT</b> present!</p>
+{% endif %}
+
+{% if test_valid_list %}
+  <p>Variable "test_valid_list" is present!</p>
+{% else %}
+  <p>Variable "test_valid_list" is <b>NOT</b> present!</p>
+{% endif %}
+
+{% block body %}
+
+{% endblock body %}

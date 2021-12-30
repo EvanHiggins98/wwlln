@@ -1,0 +1,12 @@
+
+ScriptHeaderFilename = {
+ATL_16_1_Alex_ScriptHeader
+}
+
+script_prefix = {
+ATL_16_1_Alex_
+}
+
+workspace_wrapper = {
+     3.0000
+}

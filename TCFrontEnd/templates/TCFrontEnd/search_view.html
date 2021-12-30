@@ -1,0 +1,15 @@
+{% extends "wwlln/base.html" %}
+
+{% block body %}
+<h1>
+<center>
+Showing storms containing: "{{ search_string }}"<br>
+<small>Found {{ storm_count }}{% if storm_count == 1 %} storm
+                              {% else %}                storms
+                              {% endif %}
+</small>
+</center>
+</h1>
+<hr/>
+{% include "storms/storm_list.html" with storms=storms %}
+{% endblock body %}

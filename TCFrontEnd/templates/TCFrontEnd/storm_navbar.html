@@ -1,0 +1,44 @@
+{% load staticfiles %}
+
+{% if season_number and season_list %}
+<li class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+    <strong>Season:</strong> {{ season_number }}
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    {% for season_iter in season_list %}
+      {% if season_iter == season_number %}
+        <li class="active">
+      {% else %}
+        <li>
+      {% endif %}
+        <a href="{% url 'storms:view_storm_group' season_num=season_iter %}">{{ season_iter }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</li>
+
+  {% if region and region_list %}
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      <strong>Region:</strong> {{ region }}
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      {% for region_iter in region_list %}
+        {% if region_iter == region %}
+          <li class="active">
+        {% else %}
+          <li>
+        {% endif %}
+          <a href="{% url 'storms:view_storm_group' season_num=season_number region=region_iter %}">{{ region_iter }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </li>
+    {% if storm %}
+      <li class="active"><a href="#"><strong>Storm:</strong> {{ storm.name }}</a></li>
+    {% endif %}
+  {% endif %}
+{% endif %}

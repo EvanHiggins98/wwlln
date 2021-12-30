@@ -1,0 +1,99 @@
+{% block header %}
+{% load staticfiles %}
+{% endblock header %}
+
+{# A container for the cascading collapse panels for displaying the storms #}
+<div class="container panel-group panel-nested">
+  {# Loop through each year #}
+  {% for year, regions in storms %}
+    {# Define the HTML ID tag for this year's panel #}
+    {% with group_years="collapse-group-"|add:year first_year_region=forloop.first %}
+    {# Define whether or not this panel starts collapsed or not #}
+    {% with year_aria_expanded=first_year_region|lower %}
+    {# Start defining the contents of this year's panel #}
+    <div class="panel panel-default">
+    {# Create the labeled banner for this year's collapse panel #}
+    <div class="panel-heading"
+         data-toggle="collapse"
+         href="#{{ group_years }}"
+         aria-expanded="{{ year_aria_expanded }}">
+      {# Label each panel in the format "[i] Year: [YYYY]" where [i] is an #}
+      {# icon that indicates if this panel is collapsed or not             #}
+      <h3>
+        <i id="{{ group_years }}_icon" class="glyphicon glyphicon-triangle-right"></i>
+        Year: {{ year }}
+      </h3>
+    </div>
+    {# Populate this year's panel area with a collapse panel for each region #}
+    {# If this is the first year of the year set, have its group be open     #}
+    <div id="{{ group_years }}"
+         class="panel-collapse panel-group collapse {% if first_year_region %}in{% endif %}"
+         aria-expanded="{{ year_aria_expanded }}">
+    {# Loop through all the regions for this year #}
+    {% for region, storm_entries in regions %}
+      {% with group_regions=group_years|add:"-"|add:region %}
+      {# Start defining the contents of this region's panel within this year #}
+      <div class="panel panel-default">
+        {# Create the labeled banner for this region's collapse panel #}
+        <div class="panel-heading"
+             data-toggle="collapse"
+             href="#{{ group_regions }}"
+             aria-expanded={% if first_year_region and forloop.first %}"true"{% else %}"false"{% endif %}
+             >
+          <h3 class="panel-title"> {% with storm_count=storm_entries|length %}
+            <i id="{{ group_regions }}_icon" class="glyphicon glyphicon-triangle-right"></i>
+            {{ year }} Region: {{ region }}
+            ({{ storm_count }}
+             {% if storm_count == 1 %} storm)
+             {% else %}                storms)
+             {% endif %}
+          </h3> {% endwith %}
+        </div>
+        {# If this is the first region of the region set, and it is still the first year in the year set, have its group be open #}
+        <div id="{{ group_regions }}"
+             class="panel-collapse collapse {% if first_year_region and forloop.first %}in{% endif %}"
+             aria-expanded={% if first_year_region and forloop.first %}"true"{% else %}"false"{% endif %}
+             >
+          <table class="table table-responsive table-striped table-condensed">
+            <thead>
+              <tr>
+                <th class="visible-start-xs">Name</th>
+                <th class="visible-start-md"
+                    title="Tropical Cyclone Season (as per the basin the storm occurred in)"
+                    data-toggle="tooltip"   >TC Season</th>
+                <th class="visible-start-xs">Region</th>
+                <th class="visible-start-sm">Storm Number</th>
+                <th class="visible-start-xs">Start Date</th>
+                <th class="visible-start-sm">End Date</th>
+                <th class="visible-start-sm">Duration</th>
+                <th class="visible-start-xs"></th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for storm in storm_entries %}
+              <tr>
+                <td class="visible-start-xs">{{ storm.name }}</td>
+                <td class="visible-start-md">{{ storm.season_number }}</td>
+                <td class="visible-start-xs">{{ storm.region }}</td>
+                <td class="visible-start-sm">{{ storm.storm_number }}</td>
+                <td class="visible-start-xs">{{ storm.date_start }}</td>
+                <td class="visible-start-sm">{{ storm.date_end }}</td>
+                <td class="visible-start-sm">{{ storm.date_end|timeuntil:storm.date_start }}</td>
+                <td class="visible-start-xs"><a href="{% url 'storms:view_storm' season_num=storm.season_number region=storm.region storm_num=storm.storm_number %}" class="button">View</a></td>
+              </tr>
+            {% endfor %} {# End: loop through all storms in region for year #}
+            </tbody>
+          </table>
+        </div>
+      </div> {# Close year/region group panel #}
+      {% endwith %} {# End: with...group_regions #}
+    {% endfor %} {# End: loop through all regions for year #}
+    </div> {# Close year > region group panel #}
+    {% endwith %} {# End: with...year_aria_expanded #}
+    {% endwith %} {# End: with...group_years #}
+    </div> {# Close the panel group for the current year #}
+  {% endfor %} {# End: loop through all years #}
+</div> {# End: cascading collapse panels #}
+
+<script src="{% static 'storms/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static 'storms/wwlln/js/collapse_panel_icon.js' %}"></script>

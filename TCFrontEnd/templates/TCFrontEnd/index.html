@@ -1,0 +1,42 @@
+{% extends "wwlln/base.html" %}
+
+{% block title %}Storm Select Page{% endblock title %}
+
+{% block header %}
+{% load staticfiles %}
+{% endblock header %}
+
+{% block body %}
+<h1>
+  <center>
+    Tropical Cyclones<br>
+    <small>
+      Data for {{ storms.count }} storms from {{ storms.storms_date_start }}
+      to {{ storms.storms_date_end }}
+    </small>
+  </center>
+</h1>
+<hr/>
+
+<div class="container-fluid">
+<div class="row">
+  <div class="col-sm-12 col-md-12">
+  <center>
+    <h1>
+    <small>
+      Visualization of WWLLN lightning and passive microwave satellite data for
+      tropical cyclones globally updated every 3 hours.
+    </small>
+    </h1>
+  </center>
+  </div>
+</div>
+<hr/>
+
+{% include "storms/storm_list.html" with storms=storms.storms_by_year_and_region %}
+
+{% endblock body %}
+
+
+{% block footer %}
+{% endblock footer %}

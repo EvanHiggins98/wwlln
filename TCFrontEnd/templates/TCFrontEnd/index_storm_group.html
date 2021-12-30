@@ -1,0 +1,31 @@
+{% extends "wwlln/base.html" %}
+
+{% block title %}Storm Group Page{% endblock title %}
+
+{% block header %}
+{% load staticfiles %}
+{% endblock header %}
+
+
+{% block body %}
+<h1>
+  <center>
+    Tropical Cyclones in Season {{ season_number }}
+    {% if region != None %}
+      and Region '{{ region }}'
+    {% endif %}
+    <br>
+    <small>
+      Data found for {{ storm_count }} storms
+    </small>
+  </center>
+</h1>
+<hr/>
+
+{% include "storms/storm_list.html" with storms=storms %}
+
+{% endblock body %}
+
+
+{% block footer %}
+{% endblock footer %}
