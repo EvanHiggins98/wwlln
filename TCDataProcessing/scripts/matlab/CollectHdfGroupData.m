@@ -1,4 +1,4 @@
-function CollectHdfGroupData(fid, hdfFilename, hdfInfo)
+function result = CollectHdfGroupData(fid, hdfFilename, hdfInfo)
     for iGroup = 1:length(hdfInfo.Groups)
         CollectHdfGroupData(fid, hdfFilename, hdfInfo.Groups(iGroup));
     end
@@ -15,4 +15,6 @@ function CollectHdfGroupData(fid, hdfFilename, hdfInfo)
         %disp(data);
     end
     %fclose(fid);
+
+    result = true;
 end
