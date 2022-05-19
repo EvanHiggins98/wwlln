@@ -3,7 +3,7 @@
 {% block title %}Storm Select Page{% endblock title %}
 
 {% block header %}
-{% load staticfiles %}
+{% load static %}
 {% endblock header %}
 
 {% block body %}
@@ -33,7 +33,7 @@
 </div>
 <hr/>
 
-{% include "storms/storm_list.html" with storms=storms.storms_by_year_and_region %}
+{% include "TCFrontEnd/storm_list.html" with storms=storms.storms_by_year_and_region %}
 
 {% endblock body %}
 

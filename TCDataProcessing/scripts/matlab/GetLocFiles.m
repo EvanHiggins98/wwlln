@@ -25,28 +25,28 @@ function locFiles = GetLocFiles(StormYear, varargin)
     AFilesDirectory1 = fullfile(wwlln_data_path__, 'AFiles');
     AFilesDirectory2 = fullfile(wwlln_data_path__, 'AFiles', 'AFiles');
 
-    %filename = fullfile(AEFilesDirectory, ['AE', namePattern]);
-    aeFilename  = AEFilename(StormYear, StormMonth, StormDay);
-    locFolder   = AEFilesDirectory;
-    filename    = fullfile(locFolder, aeFilename);
+    % Check for the A files for the StormDay
+    aFilename   = AFilename(StormYear, StormMonth, StormDay, StormHour, StormMinute);
+    locFolder   = AFilesDirectory1;
+    filename    = fullfile(locFolder, aFilename);
     locFiles    = dir(filename);
-    locFileType = AEFilePrefix;
-    locFormat   = struct('formatString',                             ...
-                         '%g/%g/%g,%g:%g:%g,%g,%g,%g,%g,%g,%g,%g\n', ...
-                         'inputCount', 13);
+    locFileType = AFilePrefix;
+    locFormat   = struct('formatString',                    ...
+                         '%g/%g/%g,%g:%g:%g,%g,%g,%g,%g\n', ...
+                         'inputCount', 10);
 
     % Check for the AE file for the StormDay
     if (size(locFiles, 1) == 0)
-        % Check for the A files for the StormDay
         disp(['Could not find file(s): ', filename]);
-        aFilename   = AFilename(StormYear, StormMonth, StormDay, StormHour, StormMinute);
-        locFolder   = AFilesDirectory1;
-        filename    = fullfile(locFolder, aFilename);
+        %filename = fullfile(AEFilesDirectory, ['AE', namePattern]);
+        aeFilename  = AEFilename(StormYear, StormMonth, StormDay);
+        locFolder   = AEFilesDirectory;
+        filename    = fullfile(locFolder, aeFilename);
         locFiles    = dir(filename);
-        locFileType = AFilePrefix;
-        locFormat   = struct('formatString',                    ...
-                             '%g/%g/%g,%g:%g:%g,%g,%g,%g,%g\n', ...
-                             'inputCount', 10);
+        locFileType = AEFilePrefix;
+        locFormat   = struct('formatString',                             ...
+                            '%g/%g/%g,%g:%g:%g,%g,%g,%g,%g,%g,%g,%g\n', ...
+                            'inputCount', 13);  
 
         if (size(locFiles, 1) == 0)
             % Check the alternative location for the A files for the StormDay

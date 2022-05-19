@@ -1,2 +1,4 @@
-.wwlln/credentials.py
-.wwlln-venv/
+wwlln/credentials.py
+wwlln-venv/
+**/data/
+**/processed_data/

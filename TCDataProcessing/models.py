@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from django.db.models import Q
 
@@ -31,6 +33,49 @@ class Storm(models.Model):
                   for year in reversed(range(Storm.storms_date_start().year,
                                            (Storm.storms_date_end().year + 1)))]
         return Storm.remove_empty_storm_groups(storms)
+
+    @staticmethod
+    def storms_in_year_and_region(year, region, storms = None):
+        date_start = datetime.date(year = year,       month = 1, day = 1)
+        date_end   = datetime.date(year = (year + 1), month = 1, day = 1)
+        if (storms is None):
+            storms = Storm.valid_objects()
+        return (storms.filter(region = region)
+                       .exclude(  Q(date_end__lt    = date_start)
+                                | Q(date_start__gte = date_end))
+                        .order_by('name'))
+    @staticmethod
+    def storms_date_start():
+        result = Storm.valid_objects().order_by('date_start')
+        if not result:
+            return datetime.date(2009,1,1)
+        return result[0].date_start
+
+    @staticmethod
+    def storms_date_end():
+        result = Storm.valid_objects().order_by('-date_start')
+        if not result:
+            return datetime.date.today()
+        return result[0].date_end
+
+    @staticmethod
+    def valid_objects():
+        return Storm.objects
+
+    @staticmethod
+    def remove_empty_storm_groups(storms):
+        for year in storms:
+            for i_region in reversed(list(enumerate(year[1]))):
+                i      = i_region[0]
+                region = i_region[1]
+                if (len(region[1]) == 0):
+                    del year[1][i]
+        for i_year in reversed(list(enumerate(storms))):
+            i    = i_year[0]
+            year = i_year[1]
+            if (len(year[1]) == 0):
+                del storms[i]
+        return storms
 
     @staticmethod
     def storms_search_by_year_and_region(search_string):

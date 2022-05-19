@@ -8,7 +8,7 @@ from TCDataProcessing.models import Storm
 _REGIONS_NEW = ['AL',  'CP',   'EP',   'IO', 'SH',   'WP', 'LS']
 
 def index(request):
-    return render(request, 'TCFrontend/index.html', {})
+    return render(request, 'TCFrontend/index.html', {'storms': Storm})
 
 def view_storm(request, season_num, region, storm_num):
     storm = get_object_or_404(Storm,
@@ -18,7 +18,7 @@ def view_storm(request, season_num, region, storm_num):
     #products = Product.objects.filter(resource__source__per_storm = True)
     products = [product
                 for product in Product.objects.all()
-                if (product.is_public() and product.per_storm())]
+                if (product.is_public())]
     context = { 'storm':         storm,
                     #'scripts':       Script.objects.all(),
                     'products':      products,
@@ -26,7 +26,7 @@ def view_storm(request, season_num, region, storm_num):
                     'region':        region,
                     'season_list':   Storm.get_season_range(),
                     'region_list':   _REGIONS_NEW }
-    return render(request,'storms/storm_view.html',context)
+    return render(request,'TCFrontEnd/storm_view.html',context)
 
 
 def view_storm_group(request, season_num, region = None):

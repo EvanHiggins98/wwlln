@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  {############################################################################}
+  {################################## Header ##################################}
+  {############################################################################}
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {############################### Block: title ###############################}
+  <title>{% block title %}Tropical Cyclones{% endblock title %}</title>
+
+  {# Load CSS files used by all pages. #}
+  {% load static %}
+  <link rel="stylesheet"
+        type="text/css"
+        href="{% static 'storms/bootstrap/css/bootstrap.min.css' %}" />
+  <link rel="stylesheet"
+        type="text/css"
+        href="{% static 'storms/wwlln/css/base.css' %}" />
+  <link rel="stylesheet"
+        type="text/css"
+        href="{% static 'storms/wwlln/css/minimum_device_visibility.min.css' %}" />
+  <link rel="stylesheet"
+        type="text/css"
+        href="{% static 'storms/wwlln/css/footer.min.css' %}" />
+  <link rel="stylesheet"
+        type="text/css"
+        href="{% static 'storms/wwlln/css/panel.css' %}" />
+
+  {############################## Block: header ###############################}
+  {% block header %}
+  {% endblock header %}
+</head>
+
+{##############################################################################}
+{#################################### Body ####################################}
+{##############################################################################}
+<body>
+  {############################ Top Navigation Bar ############################}
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button"
+                class="navbar-toggle"
+                data-toggle="collapse"
+                data-target="#wwlln_navbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div> {# End: navbar-header #}
+      <div class="collapse navbar-collapse" id="wwlln_navbar">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="{% url 'storms:index' %}">
+              <i class="glyphicon glyphicon-home"></i> Home
+            </a>
+          </li>
+          <li>
+            {% comment %} <a href="{% url 'survey:survey' %}">
+              <i class="glyphicon glyphicon-bullhorn"></i> Feedback Survey
+            </a> {% endcomment %}
+          </li>
+          {# {% include "./storm_navbar.html" %} #}
+          {% include "TCFrontEnd/storm_navbar.html" %}
+          {% block top_nav_main %}
+          {% endblock top_nav_main %}
+        </ul> {# End nav #}
+        {# {% include "./search_bar.html" %} #}
+        {% include "TCFrontEnd/search_bar.html" %}
+        {% block top_nav %}
+        {% endblock top_nav %}
+      </div> {# End: collapse #}
+    </div> {# End: container #}
+  </nav> {# End: navbar #}
+
+  {############################### Block: body ################################}
+{#################################### NEW #####################################}
+  {% block body %}
+  {% endblock body %}
+
+  <div class="project-footer text-muted">
+    <h4>How to Reference WWLLN-TC</h4>
+    <p>
+    If you include data from this site in your research, please reference the
+    WWLLN-TC Eos Project Update article:
+    <br>
+    <p>
+      Solorzano, N. N., J. N. Thomas, and C. Bracy (2018), Monitoring tropical
+      cyclones with lightning and satellite data, Eos, 99,
+      <a href="https://doi.org/10.1029/2018EO092439">
+        https://doi.org/10.1029/2018EO092439
+      </a>
+      . Published on 19 February 2018.
+      <br><br>
+      <a href="https://eos.org/project-updates/monitoring-tropical-cyclones-with-lightning-and-satellite-data">
+        https://eos.org/project-updates/monitoring-tropical-cyclones-with-lightning-and-satellite-data
+      </a>
+    </p>
+    <h4>Data Sources</h4>
+    <li>
+      <a href="http://wwlln.net/">
+        World Wide Lightning Location Network
+      </a>
+      (WWLLN)
+    </li>
+    <li>
+      Satellite data and storm track data from the
+      <a href="http://www.nrlmry.navy.mil/tc_pages/tc_home.html">
+        Naval Research Laboratory
+      </a>
+    </li>
+    {##### <h4>How Reference Using this Site</h4>                            #####}
+    {##### <p>                                                               #####}
+    {#####   Please reference                                                #####}
+    {#####   <a href="http://wwlln.net/storms/">http://wwlln.net/storms/</a> #####}
+    {#####   when using visualizations from this site.                       #####}
+    {##### </p>                                                              #####}
+    <h4>Related References</h4>
+    <li>
+      Thomas, J. N., N. N. Solorzano, S. A. Cummer, and R. H. Holzworth (2010),
+      <cite>Polarity and energetics of inner core lightning in three intense
+      North Atlantic hurricanes,</cite> J. Geophys. Res., 115, A00E15,
+      doi:10.1029/2009JA014777.
+    </li>
+    <li>
+      Solorzano, N. N., J. N. Thomas, and R. H. Holzworth, <cite>Global studies
+      of tropical cyclones using the World Wide Lightning Location Network,
+      </cite> Third Conf. on Meteo. Applic. of Lightning Data, New Orleans,
+      LA, 2008.
+    </li>
+    <h4>Disclaimer</h4>
+    <p>
+      WWLLN and the U. of Washington are not responsible for use of these
+      data in the forecasting of tropical cyclones.
+    </p>
+    <h4>Data Access</h4>
+    <p>
+      This website includes visualizations of WWLLN lightning data, but does not
+      include stroke level data. For stroke level data, please contact Bob
+      Holzworth at bobholz@u.washington.edu.
+    </p>
+    <h4>Near Real-Time Data</h4>
+    <p>
+      Note that WWLLN data used for archiving is processed separately from
+      almost real-time WWLLN data. This may cause differences in visualizations
+      as they appear in almost real-time compared with archived versions.
+    </p>
+    <h4>About</h4>
+    <p>
+      Developed by Jeremy Thomas, Natalia Solorzano, Matthew Wendell, and
+      Connor Bracy. Technical support from Carl Christofferson. WWLLN support
+      from Robert Holzworth. Project is a collaboration involving the Earth and
+      Space Science Dept. at U. of Washington, DigiPen Institute of Technology,
+      and NorthWest Research Associates. Questions, contact Jeremy Thomas
+      (jnt@uw.edu)
+    </p>
+  </div>
+
+  <script src="{% static 'storms/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'storms/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip({
+            container : 'body'
+        });
+    });
+  </script>
+</body>
+
+{% block footer %}
+{% endblock footer %}
+</html>

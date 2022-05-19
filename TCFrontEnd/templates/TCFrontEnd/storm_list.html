@@ -1,5 +1,5 @@
 {% block header %}
-{% load staticfiles %}
+{% load static %}
 {% endblock header %}
 
 {# A container for the cascading collapse panels for displaying the storms #}
@@ -79,7 +79,7 @@
                 <td class="visible-start-xs">{{ storm.date_start }}</td>
                 <td class="visible-start-sm">{{ storm.date_end }}</td>
                 <td class="visible-start-sm">{{ storm.date_end|timeuntil:storm.date_start }}</td>
-                <td class="visible-start-xs"><a href="{% url 'storms:view_storm' season_num=storm.season_number region=storm.region storm_num=storm.storm_number %}" class="button">View</a></td>
+                <td class="visible-start-xs"><a href="{% url 'storms:view_storm/' season_num=storm.season_number region=storm.region storm_num=storm.storm_number %}" class="button">View</a></td>
               </tr>
             {% endfor %} {# End: loop through all storms in region for year #}
             </tbody>

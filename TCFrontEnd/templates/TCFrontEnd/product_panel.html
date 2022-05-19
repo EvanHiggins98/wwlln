@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 
 {% if has_images %}
 {% with gif_count=gifs|length %}
@@ -79,4 +79,6 @@
   </div>        {# End: panel-collapse #}
 </div>        {# End: panel #}
 {% endwith %}
+{% else %}
+test
 {% endif %} {# End: has_images #}

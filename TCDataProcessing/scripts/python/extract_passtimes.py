@@ -3,10 +3,7 @@ import sys
 
 from operator import itemgetter
 
-import backend.regex as regex
-
-from backend.debug import Debug
-from script.utilities import ScriptParameterName, ScriptError
+import re
 
 from django.conf import settings
 
@@ -57,7 +54,7 @@ def extract_passtimes(storm,
                     image_filename_regex = sat_image_filename_regex(mission, sensor)
                     for sat_image_filename in input_instances_list.files:
                         #Debug('sat_image_filename({})'.format(sat_image_filename), print_to_stdout = True)
-                        regex_matches = regex.find_all(image_filename_regex, sat_image_filename)
+                        regex_matches = re.findall(re.compile(image_filename_regex), sat_image_filename)
                         if (len(regex_matches) > 0):
                             regex_match = regex_matches[0]
                             #passtime_year  = regex_matches[0]
@@ -75,7 +72,7 @@ def extract_passtimes(storm,
                             sensor_file.write(PASSTIME_FORMAT_STR.format(*passtime))
 
     except IOError:
-        Debug('Failed to create/open: "{}"'.format(sensor_filename))
+        print('Failed to create/open: "{}"'.format(sensor_filename))
         return False
 
     #passtimes_filename = os.path.join(input_dir, passtimes_filename)
@@ -143,19 +140,19 @@ if (__name__ == '__main__'):
     globals__ = globals()
 
     try:
-        storm              = globals__[ScriptParameterName.storm]
-        s_prefix           = globals__[ScriptParameterName.storm_filename_prefix]
-        mission_sensor_map = globals__[ScriptParameterName.mission_sensor_map]
-        resources          = globals__[ScriptParameterName.resources]
+        storm              = globals__['storm']
+        s_prefix           = globals__['storm_filename_prefix']
+        mission_sensor_map = globals__['mission_sensor_map']
+        resources          = globals__['resources']
         #input_dir       = globals__[ScriptParameterName.input_dir]
         #input_instances = globals__[ScriptParameterName.input_instances]
-        input_instances_lists = globals__[ScriptParameterName.input_instances_lists]
-        output_instances_list = globals__[ScriptParameterName.output_instances_list]
+        input_instances_lists = globals__['input_instances_lists']
+        output_instances_list = globals__['output_instances_list']
         #input_dir             = input_instances_lists[0].path
         #input_instances       = input_instances_lists[0].files
 
         output_filename_pattern = (  s_prefix
-                                   + (settings.PATHS.PASSTIMES_BASE_FILENAME
+                                   + ((r'.*_.*_Passtimes\.txt')
                                       .replace('.*', '{}')
                                       .replace('\.', '.')))
 
@@ -174,26 +171,22 @@ if (__name__ == '__main__'):
                                     output_filename_pattern,
                                     mission_sensor_map)
 
-        globals__[ScriptParameterName.success] = success
+        globals__['success'] = success
 
-    except ScriptError as error:
-        Debug('ScriptError: {}'.format(error), print_to_stdout = True)
-        globals__[ScriptParameterName.success] = False
-        globals__[ScriptParameterName.error]   = error
     except KeyError as error:
-        Debug('KeyError: {}'.format(error), print_to_stdout = True)
-        error = ScriptError('Undefined required GLOBAL variable "{}"'.format(error))
-        globals__[ScriptParameterName.success] = False
-        globals__[ScriptParameterName.error]   = error
+        print('KeyError: {}'.format(error))
+        error = 'Undefined required GLOBAL variable "{}"'.format(error)
+        globals__['success'] = False
+        globals__['error']   = error
     except NameError as error:
-        Debug('NameError: {}'.format(error), print_to_stdout = True)
-        error = ScriptError('Undefined required LOCAL variable "{}"'.format(error))
-        globals__[ScriptParameterName.success] = False
-        globals__[ScriptParameterName.error]   = error
+        print('NameError: {}'.format(error),)
+        error ='Undefined required LOCAL variable "{}"'.format(error)
+        globals__['success'] = False
+        globals__['error']   = error
     except:
         error_type    = sys.exc_info()[0]
         error_message = sys.exc_info()[1]
-        Debug('Unpredicted Error({}): {}'.format(error_type, error_message), print_to_stdout = True)
-        error = ScriptError('Unexpected Error({}): "{}"'.format(error_type, error_message))
-        globals__[ScriptParameterName.success] = False
-        globals__[ScriptParameterName.error]   = error
+        print('Unpredicted Error({}): {}'.format(error_type, error_message))
+        error = 'Unexpected Error({}): "{}"'.format(error_type, error_message)
+        globals__['success'] = False
+        globals__['error']   = error

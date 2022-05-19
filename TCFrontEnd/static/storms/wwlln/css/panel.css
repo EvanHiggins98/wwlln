@@ -1,0 +1,28 @@
+.panel-heading {
+  cursor: pointer;
+}
+
+.panel-nested .panel-group {
+  margin-bottom: 5px;
+}
+
+.panel-nested .panel .panel:first-child {
+  margin-top: 5px;
+}
+
+.panel-nested .panel:nth-of-type(odd) .panel-heading {
+  background-color: rgba(128, 0, 218, 0.25);
+}
+
+.panel .panel-script {
+  background-color: rgba(128, 0, 218, 0.25);
+}
+
+.panel-nested .panel:nth-of-type(odd) .panel:nth-of-type(even) .panel-heading,
+.panel-nested > .panel:nth-of-type(even) > .panel-heading {
+  background-color: rgba(196, 196, 196, 0.25);
+}
+
+.panel-nested .panel .panel {
+  margin-left: 10px;
+}

@@ -1,0 +1,7 @@
+body {
+  padding-top: 70px;
+}
+
+ul.nav > li {
+  border-right: 1px solid #D1D1D1;
+}

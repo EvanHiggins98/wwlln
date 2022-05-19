@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
 
+app_name = 'wwlln'
+
 urlpatterns = [
     path('storms/', include('TCFrontEnd.urls')),
     path('admin/', admin.site.urls),

@@ -1,11 +1,9 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
-from TCDataProcessing.models import Mission
 import wwlln.scripts.file_io as file_io
 import wwlln.scripts.url_request as url_request
 import re
 import urllib.error
-import pathlib
 
 # Create your models here.
 class Source(models.Model):
@@ -27,12 +25,24 @@ class Resource(models.Model):
 
     def collect(self, storm='', mission='', sensor='', date_time=None, force=False):
         try:
-            full_url = url_request.createURL(self.source.url_path,self.path)
-            formatted_url = full_url.format(Storm=storm, Mission=mission, Sensor=sensor, Year=date_time.year, Month=date_time.month, Day=date_time.day)
+            is_local = self.source.is_local
+            full_remote = None
+            if(is_local):
+                full_remote = file_io.createPath(self.source.url_path, self.path)
+            else:
+                full_remote = url_request.createURL(self.source.url_path,self.path)
+
+            formatted_remote = full_remote.format(Storm=storm, Mission=mission, Sensor=sensor, Year=date_time.year, Month=date_time.month, Day=date_time.day)
             formatted_path = self.local_path.format(Storm=storm, Mission=mission, Sensor=sensor, Year=date_time.year, Month=date_time.month, Day=date_time.day)
             formatted_filename = self.filename.format(Storm=storm, Mission=mission, Sensor=sensor, Year=date_time.year, Month=date_time.month, Day=date_time.day)
             filename_pat = re.compile(formatted_filename)
-            list_dir = url_request.request_list_dir(formatted_url)
+            
+            list_dir = None
+            if(is_local):
+                list_dir = file_io.listdir(formatted_remote)
+            else:
+                list_dir = url_request.request_list_dir(formatted_remote)
+
             if(len(list_dir)):
                 resource_list = list_dir['dirs']
                 last_modified = list_dir['last_modified']
@@ -43,7 +53,7 @@ class Resource(models.Model):
                 for file in file_results:
                     if file['last_modified']>file_io.get_last_modified_datetime(file,formatted_path):
                         file_url = url_request.createURL(formatted_path,file['file'])
-                        file_data = url_request(file_url)
+                        file_data = url_request.request_url_contents(file_url)
                         file_io.create_directory(formatted_path)
                         file_io.create_file(file,formatted_path,Data=file_data)
             return True

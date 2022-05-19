@@ -1,4 +1,6 @@
 from django.db import models
+from wwlln.scripts import file_io as file_io
+import datetime
 
 # Create your models here.
 class Product(models.Model):
@@ -7,3 +9,40 @@ class Product(models.Model):
     description = models.TextField()
     path = models.TextField()
     _is_public = models.BooleanField(default=False)
+
+    STATIC_PRODUCT_PATH = file_io.createPath('data','processed_data')
+    STATIC_ROOT = file_io.createPath('TCFrontEnd','static')
+    def is_public(self):
+        return self._is_public
+
+    def get_storage_path(self, storm = None, date_time = None):
+        if(storm is None):
+            return self.path
+        if(storm.season_number is None):
+            return self.path
+        if (date_time is None):
+            date_time = datetime.datetime.now()
+        return file_io.createPath(self.STATIC_PRODUCT_PATH, str(storm.season_number), storm.region, str(storm.storm_number), self.path)
+
+    def get_relative_storage_path(self, storm = None, date_time = None):
+        if(storm is None):
+            return self.path
+        if(storm.season_number is None):
+            return self.path
+        if (date_time is None):
+            date_time = datetime.datetime.now()
+        return file_io.createPath(self.STATIC_ROOT, self.STATIC_PRODUCT_PATH, str(storm.season_number), storm.region, str(storm.storm_number), self.path)
+
+    def get_full_storage_path(self, storm = None, date_time = None):
+        if(storm is None):
+            return self.path
+        if(storm.season_number is None):
+            return self.path
+        if (date_time is None):
+            date_time = datetime.datetime.now()
+        return file_io.createPath(file_io.ROOT_PATH, self.STATIC_PRODUCT_PATH, str(storm.season_number), storm.region, str(storm.storm_number), self.path)
+
+
+
+    
+        

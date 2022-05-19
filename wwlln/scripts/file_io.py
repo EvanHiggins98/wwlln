@@ -1,8 +1,11 @@
 from os import symlink
+import re
 from pathlib import Path
 from shutil import rmtree, copy
 import shutil
-import datetime
+from datetime import datetime, timezone
+
+ROOT_PATH = Path.cwd()
 
 def create_file(filename,path='',is_text=False,Data=None):
     file_mode = ('t' if is_text else 'b')
@@ -48,8 +51,14 @@ def create_directory(dirPath, force=False):
     delete_directory(dirPath,force)
     to_create.mkdir(exist_ok=True)
 
-def listdir(dirPath=''):
-    return list(Path(dirPath).iterdir)
+def listdir(dirPath='',regex_pattern='.*'):
+    result = []
+    lastMod = []
+    for dir in Path(dirPath).iterdir():
+        if(re.match(regex_pattern,dir.name)):
+            result.append(dir)
+            lastMod.append(datetime.fromtimestamp(dir.stat().st_mtime,tz=timezone.utc))
+    return {'dirs': result, 'last_modified': lastMod}
 
 def createPath(*paths):
     return Path(*paths)
@@ -57,5 +66,5 @@ def createPath(*paths):
 def get_last_modified_datetime(filename, path=''):
     file_path = Path(path,filename)
     if(file_path.exists()):
-        return datetime.datetime.timestamp(file_path.stat().st_mtime())
-    return datetime.datetime.min
+        return datetime.timestamp(file_path.stat().st_mtime())
+    return datetime.min
