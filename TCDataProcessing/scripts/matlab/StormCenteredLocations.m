@@ -4,11 +4,9 @@
 %exit(); %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function = StormCenteredLocations(storm_trackfile__,storm_wwlln_locations__)
-    clear
+function result = StormCenteredLocations(storm_trackfile__,storm_wwlln_locations__,output_file__)
     % ==================================================
     %StormScriptHeader;
-    ScriptHeader;
     % ==================================================
 
     OUTPUT_WRITE_FMT = '%g %02g %02g %02g %02g %07.4f %06.4f %06.4f %g %g\n';
@@ -102,7 +100,7 @@ function = StormCenteredLocations(storm_trackfile__,storm_wwlln_locations__)
 
         % If we found a valid log file, attempt to open the previously
         % processed storm centered file for reading.
-        dataFileOut = fopen(storm_wwlln_locations__, 'rt');
+        dataFileOut = fopen(output_file__, 'rt');
         % If we were able to find a valid storm-centered locations file, read
         % in its previously processed contents and close it to be used for the
         % output of the current process phase.
@@ -189,8 +187,7 @@ function = StormCenteredLocations(storm_trackfile__,storm_wwlln_locations__)
         % Get the list of .loc data files we can find associated to the current
         % day and loop through them to confirm they have been previously
         % processed, or process them in this pass.
-        locFiles = GetLocFiles(StormYear, StormMonth, StormDay);
-
+        locFiles = GetLocFiles(storm_wwlln_locations__ ,StormYear, StormMonth, StormDay);
     %   For locFile in locFiles
         for i = 1:size(locFiles)
     %       locFile.dayDatenum = datenum(current day)
@@ -310,8 +307,7 @@ function = StormCenteredLocations(storm_trackfile__,storm_wwlln_locations__)
     if (dataFileOut ~= -1)
         fclose(dataFileOut);
     end
-    dataFileOut = fopen(storm_wwlln_locations__, 'wt');
-
+    dataFileOut = fopen(output_file__, 'wt');
     for i = 1:size(dataFiles, 2)
         processedData = dataFileDataMap(dataFiles(i).name);
         dataFiles(i).lines = size(processedData, 2);
@@ -422,6 +418,6 @@ function = StormCenteredLocations(storm_trackfile__,storm_wwlln_locations__)
     %  end                %loop through all days of storm
 
     fclose(dataFileOut);
-
+    result = true;
     %exit;
 end

@@ -1,4 +1,4 @@
-function locFiles = GetLocFiles(StormYear, varargin)
+function locFiles = GetLocFiles(wwlln_data_path__, StormYear, varargin)
     % Optional Arguments (date): mm, dd, HH, MM
     optionalArgs = {'', '', '', ''};
     optionalArgCount = length(optionalArgs);
@@ -16,7 +16,7 @@ function locFiles = GetLocFiles(StormYear, varargin)
     %namePattern = [StormYear, varargin{:}, '*.loc'];
     %for i =
     %namePattern = [namePattern, '*.loc'];
-    wwlln_data_path__ = evalin('base', 'wwlln_data_path__');
+    %wwlln_data_path__ = evalin('base', 'storm_wwlln_locations__');
     AEFilePrefix = 'AE';
     AFilePrefix  = 'A';
     AEFilename = @(stormYear, stormMonth, stormDay)([AEFilePrefix, stormYear, stormMonth, stormDay, '*.loc']);

@@ -9,9 +9,14 @@ class Product(models.Model):
     description = models.TextField()
     path = models.TextField()
     _is_public = models.BooleanField(default=False)
+    pipeline = models.TextField(null=True)
 
-    STATIC_PRODUCT_PATH = file_io.createPath('data','processed_data')
-    STATIC_ROOT = file_io.createPath('TCFrontEnd','static')
+    STATIC_PRODUCT_PATH = file_io.create_path('data','processed_data')
+    STATIC_ROOT = file_io.create_path('TCFrontEnd','static')
+
+    def __str__(self):
+        return ('{Product.name} | {Product.title}'.format(Product=self))
+
     def is_public(self):
         return self._is_public
 
@@ -22,7 +27,7 @@ class Product(models.Model):
             return self.path
         if (date_time is None):
             date_time = datetime.datetime.now()
-        return file_io.createPath(self.STATIC_PRODUCT_PATH, str(storm.season_number), storm.region, str(storm.storm_number), self.path)
+        return file_io.create_path(self.STATIC_PRODUCT_PATH, str(storm.season_number), storm.region, str(storm.storm_number), self.path)
 
     def get_relative_storage_path(self, storm = None, date_time = None):
         if(storm is None):
@@ -31,7 +36,7 @@ class Product(models.Model):
             return self.path
         if (date_time is None):
             date_time = datetime.datetime.now()
-        return file_io.createPath(self.STATIC_ROOT, self.STATIC_PRODUCT_PATH, str(storm.season_number), storm.region, str(storm.storm_number), self.path)
+        return file_io.create_path(self.STATIC_ROOT, self.STATIC_PRODUCT_PATH, str(storm.season_number), storm.region, str(storm.storm_number), self.path)
 
     def get_full_storage_path(self, storm = None, date_time = None):
         if(storm is None):
@@ -40,9 +45,7 @@ class Product(models.Model):
             return self.path
         if (date_time is None):
             date_time = datetime.datetime.now()
-        return file_io.createPath(file_io.ROOT_PATH, self.STATIC_PRODUCT_PATH, str(storm.season_number), storm.region, str(storm.storm_number), self.path)
+        return file_io.create_path(file_io.ROOT_PATH, self.STATIC_PRODUCT_PATH, str(storm.season_number), storm.region, str(storm.storm_number), self.path)
 
-
-
-    
+    def create(self):
         

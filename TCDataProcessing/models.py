@@ -16,6 +16,10 @@ class Storm(models.Model):
     is_complete = models.BooleanField(default=False)
     last_modified = models.DateTimeField()
 
+    def __str__(self):
+        return('{Storm.season_number}{Storm.region}{Storm.storm_number:02d}{name}'
+                .format(Storm=self,name=' '+(self.name if self.name else '')))
+
     @staticmethod
     def get_season_range():
         storms       = Storm.valid_objects().order_by('season_number')
@@ -98,7 +102,13 @@ class Mission(models.Model):
     # Stores the letter identifier for a data collection mission.
     name = models.CharField(max_length = 8)
 
+    def __str__(self):
+        return ('Mission: {Mission.name}'.format(Mission = self))
+
 
 class Sensor(models.Model):
     mission = models.ForeignKey(Mission, on_delete = models.CASCADE)
     name    = models.CharField(max_length = 8)
+
+    def __str__(self):
+        return ('Mission: {Sensor.mission} | Sensor: {Sensor.name}'.format(Sensor = self))
