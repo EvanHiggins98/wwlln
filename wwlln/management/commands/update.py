@@ -18,9 +18,9 @@ class Command(BaseCommand):
             season_num = options['season_num']
             storm_num = options['storm_num']
             #date_range = options['date_range']
-            storms.find_new_storms(region,season_num,storm_num)
-            storms.update_storms()
+            #storms.find_new_storms(region,season_num,storm_num)
+            #storms.update_storms()
             #for prod in Product.objects.all():
                 #prod.create()
-        except:
-            raise CommandError('Command Error')
+        except Exception as e:
+            raise CommandError('Command Error: {}'.format(e))

@@ -142,8 +142,8 @@ def product_panel(storm, product):
         #                                 storm.local_subdir(),
         #                                 product.storage_subdir)
         
-        images = [file_io.createPath(rel_product_path, image.name) for image in images]
-        gifs   = [file_io.createPath(rel_product_path, gif.name)   for gif   in gifs]
+        images = [file_io.create_path(rel_product_path, image.name) for image in images]
+        gifs   = [file_io.create_path(rel_product_path, gif.name)   for gif   in gifs]
 
         # If we didn't find any images, return NO_DISPLAY.
         if ((len(gifs) == 0) and (len(images) == 0)):
@@ -165,7 +165,7 @@ def product_panel(storm, product):
 def product_carousel(storm, product):
     product_dir = product.get_storage_path(storm)
     NO_DISPLAY = { 'has_images': False }
-    # Make sure the directory exists.
+    # Make sure the directory exists.a
     if (os.path.isdir(product_dir)):
         # Compile the pattern to look for GIF images.
         gif_pattern = re.compile(r'.*\.gif')

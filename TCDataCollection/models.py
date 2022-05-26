@@ -34,7 +34,7 @@ class Resource(models.Model):
             is_local = self.source.is_local
             full_remote = None
             if is_local:
-                full_remote = file_io.createPath(self.source.url_path, self.path)
+                full_remote = file_io.create_path(self.source.url_path, self.path)
             else:
                 full_remote = url_request.createURL(self.source.url_path,self.path)
             
@@ -76,7 +76,7 @@ class Resource(models.Model):
                             file_io.create_file(file['file'],formatted_path,Data=file_data)
                             print('successfully retrieved {filename}. new file located at {path}'
                                 .format(filename = file['file'],path = formatted_path))
-            return True
+            return file_io.create_path(formatted_path)
         except urllib.error.URLError as e:
             print('URLError Occured: {}'.format(e))
             return False

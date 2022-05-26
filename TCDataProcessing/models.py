@@ -1,7 +1,7 @@
 import datetime
 
 from django.db import models
-from django.db.models import Q
+from django.db.models import Q, F
 
 _REGIONS_NEW = ['AL',  'CP',   'EP',   'IO', 'SH',   'WP', 'LS']
 
@@ -10,7 +10,7 @@ class Storm(models.Model):
     storm_number = models.IntegerField()
     name = models.CharField(max_length=32, null=True)
     region = models.CharField(max_length=50)
-    season_number = models.IntegerField(null=True)
+    season_number = models.IntegerField()
     date_start = models.DateField(null=True)
     date_end = models.DateField(null=True)
     is_complete = models.BooleanField(default=False)
@@ -64,7 +64,11 @@ class Storm(models.Model):
 
     @staticmethod
     def valid_objects():
-        return Storm.objects
+        return Storm.objects.exclude(Q(date_start__isnull=True)|
+                                    (Q(date_end__isnull=True)&Q(is_complete=True))|
+                                    (Q(date_end__isnull=False)&Q(is_complete=False)))
+                                    #won't allow comparison between isnull and non True/False literal
+                                    #Q(date_end__isnull=F('is_complete'))
 
     @staticmethod
     def remove_empty_storm_groups(storms):

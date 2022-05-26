@@ -1,12 +1,12 @@
 import datetime
-from wwlln.scripts.file_io import createPath
+import re
+from wwlln.scripts.file_io import create_path
 from wwlln.scripts.url_request import request_list_dir
 from TCDataCollection.models import Source, Resource
 from TCDataProcessing.models import Storm, Mission, Sensor
-import re
 from TCDataProcessing.models import Sensor
-from copy import deepcopy
-import datetime
+from TCDataProcessing.scripts.python.trackfile import TrackFile
+
 
 _REGIONS_OLD = [ 'ATL', 'CPAC', 'EPAC', 'IO', 'SHEM', 'WPAC']
 
@@ -36,7 +36,7 @@ def find_new_storms(region=None, season_num=None,storm_num=None, date_range=None
     if(season_num==None):
         season_num = datetime.datetime.now().year
     old_storms = Storm.objects.all()
-    navy_storms = find_navy_storms(region, season_num)
+    navy_storms = find_navy_storms(region, season_num if season_num>2000 else season_num+2000)
     storm_re = re.compile(r'[a-zA-z]{2}\d{6}')
     for storm in navy_storms:
         re_result = storm_re.search(storm) 
@@ -57,14 +57,30 @@ def find_new_storms(region=None, season_num=None,storm_num=None, date_range=None
         else:
             print('invalid listdir entry found: {} with attempted regex string: {}'.format(storm,r'[a-zA-z]{2}\d{6}'))
 
+def update_storm_info(storm,dir):
+    track = TrackFile()
+    track.parseNavyTrackFile(create_path(dir,'trackfile.txt'))
+    storm_name = track.get_storm_name()
+    if storm_name:
+        storm.name = storm_name.capitalize()
+    storm.date_start = track.get_start_date()
+    storm.date_end = track.get_end_date()
+    storm.save()
 
 def update_storms(storms=None, resources=None):
     if not resources:
         resources = Resource.objects.all()
+    elif not isinstance(resources,list):
+        resources = [resources]
     if not storms:
         storms = Storm.objects.filter(is_complete=False)
+    elif not isinstance(storms,list):
+        storms = [storms]
     sensors = Sensor.objects.all()
     for resource in resources:
         for storm in storms:
             for sensor in sensors:
-                resource.collect(storm=storm,mission=sensor.mission,sensor=sensor,date_time=datetime.datetime.now())
+                dir = resource.collect(storm=storm,mission=sensor.mission,sensor=sensor,date_time=datetime.datetime.now())
+                if resource.name == 'trackfile' and dir:
+                    update_storm_info(storm,dir)
+                

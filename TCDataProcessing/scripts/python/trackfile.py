@@ -1,6 +1,7 @@
 from django.utils  import timezone
 import wwlln.scripts.file_io as file_io
 import re
+from operator import attrgetter
 
 class TrackEntry:
     def __init__(self, 
@@ -122,6 +123,21 @@ class TrackFile:
             return self
         except IOError:
             print('Failed to create/open: "{}"'.format(output_path))
+    
+    def get_start_date(self):
+        return min(self.tracks, key=attrgetter('time')).time
+    
+    def get_end_date(self):
+        return max(self.tracks, key=attrgetter('time')).time
+    
+    def get_time_frame(self):
+        return (self.get_start_date,self.get_end_date)
+    
+    def get_storm_num(self):
+        return int(self.tracks[0].id[2])
+    
+    def get_storm_name(self):
+        return self.tracks[0].name
         
 def navyToReduced(input_path, output_path=''):
     trackfile = TrackFile()

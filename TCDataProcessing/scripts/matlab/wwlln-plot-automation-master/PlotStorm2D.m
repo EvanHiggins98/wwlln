@@ -159,7 +159,7 @@ function PlotStorm2D( ...
         iDay     = datestr(iDateNum, 'dd');
         % iHour    = datestr(iDateNum, 'HH');
         % iMinute  = datestr(iDateNum, 'MM');
-        tmpLocFiles = GetLocFiles(iYear, iMonth, iDay); % , iHour, iMinute);
+        tmpLocFiles = GetLocFiles(wwll_data_path__,iYear, iMonth, iDay); % , iHour, iMinute);
         if (size(tmpLocFiles, 1) > 0)
             % If we found an AE file, move the upper-bound on our data up to
             % the start of the next day so that we don't accidentally pull the
