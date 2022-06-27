@@ -1,3 +1,2 @@
 .wwlln/credentials.py
-.wwlln-venv/
-.wwlln_venv/
+.*venv/
