@@ -34,6 +34,8 @@ class CustomLogger:
             self.__logging_setup_nofile()
         else:
             print("Warning: Logging Disabled")
+        
+        self.log_message("BEGIN LOG", self._INFO)
     
     """
     Change rollover period to happen at midnight?
