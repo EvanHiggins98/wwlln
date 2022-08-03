@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.deletion import CASCADE
 import wwlln.scripts.file_io as file_io
 import wwlln.scripts.url_request as url_request
+from wwlln.scripts.custom_logging import _globalLogger
 import re
 import urllib.error
 import datetime
@@ -74,12 +75,16 @@ class Resource(models.Model):
                                                             self.source.password)
                             file_io.create_directory(formatted_path)
                             file_io.create_file(file['file'],formatted_path,Data=file_data)
-                            print('successfully retrieved {filename}. new file located at {path}'
-                                .format(filename = file['file'],path = formatted_path))
+                            _globalLogger.log_message('successfully retrieved {filename}. new file located at {path}'
+                                .format(filename = file['file'],path = formatted_path), _globalLogger._INFO)
+                            #print('successfully retrieved {filename}. new file located at {path}'
+                            #    .format(filename = file['file'],path = formatted_path))
             return file_io.create_path(formatted_path)
         except urllib.error.URLError as e:
-            print('URLError Occured: {}'.format(e))
+            _globalLogger.log_message('URLError Occured: {}'.format(e), _globalLogger._CRITICAL)
+            #print('URLError Occured: {}'.format(e))
             return False
         except OSError as e:
-            print('OSError Occured: {}'.format(e))
+            _globalLogger.log_message('OSError Occured: {}'.format(e), _globalLogger._CRITICAL)
+            #print('OSError Occured: {}'.format(e))
             return False
