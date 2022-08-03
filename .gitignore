@@ -1,4 +1,5 @@
 wwlln/credentials.py
+wwlln/logs/*
 wwlln-venv/
 **/data/
 **/processed_data/

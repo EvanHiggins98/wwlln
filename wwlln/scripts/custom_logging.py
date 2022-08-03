@@ -1,6 +1,13 @@
 import logging
 
 """
+TODO
+
+-add custom flags eg: automation, data collection, display, etc
+-remove trailing log file text
+"""
+
+"""
 NONE         (-1) - Used to Disable Printing
 
 -VVV LEVELS USED BY PYTHON LOGGING VVV-
@@ -29,11 +36,13 @@ class CustomLogger:
         self.logTime : bool = _logTime
         
         if self.printToFile:
+            print("Logging To File/Console ENABLED")
             self.__logging_setup_file()
         elif self.printToConsole:
+            print("Logging to Console ENABLED")
             self.__logging_setup_nofile()
         else:
-            print("Warning: Logging Disabled")
+            print("Warning: Logging DISABLED")
         
         self.log_message("BEGIN LOG", self._INFO)
     
@@ -44,7 +53,7 @@ class CustomLogger:
         # set up logging to file
         logging.basicConfig(level=self.printLevel,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-                    datefmt='%m-%d %H:%M',
+                    datefmt='[%d/%b/%Y %H:%M:%S]',
                     filename=self.logFilePath,
                     filemode='w')
         handler = logging.handlers.TimedRotatingFileHandler(self.logFilePath, when='H', interval=1, backupCount=23)
@@ -55,7 +64,7 @@ class CustomLogger:
             console = logging.StreamHandler()
             console.setLevel(self.printLevel)
             # set a format which is simpler for console use
-            formatter = logging.Formatter(fmt='%(asctime)s %(name)-12s %(levelname)-8s %(message)s', datefmt='%m-%d %H:%M',)
+            formatter = logging.Formatter(fmt='%(asctime)s %(name)-12s %(levelname)-8s %(message)s', datefmt='[%d/%b/%Y %H:%M:%S]',)
             # tell the handler to use this format
             console.setFormatter(formatter)
             # add the handler to the root logger
@@ -64,7 +73,7 @@ class CustomLogger:
     def __logging_setup_nofile(self):
         logging.basicConfig(level=self.printLevel,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-                    datefmt='%m-%d %H:%M',)
+                    datefmt='[%d/%b/%Y %H:%M:%S]',)
     
     """
     special flags to be implimented later
