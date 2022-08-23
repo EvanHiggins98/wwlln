@@ -13,6 +13,7 @@ class Product(models.Model):
 
     STATIC_PRODUCT_PATH = file_io.create_path('data','processed_data')
     STATIC_ROOT = file_io.create_path('TCFrontEnd','static')
+    STATIC_PIPELINE_PATH = file_io.create_path('TCDataProcessing', 'pipelines')
 
     def __str__(self):
         return ('{Product.name} | {Product.title}'.format(Product=self))
@@ -47,5 +48,7 @@ class Product(models.Model):
             date_time = datetime.datetime.now()
         return file_io.create_path(file_io.ROOT_PATH, self.STATIC_PRODUCT_PATH, str(storm.season_number), storm.region, str(storm.storm_number), self.path)
 
-    #def create(self):
-        
+    def create(self):
+
+        exec("import " + self.STATIC_PIPELINE_PATH + self.pipeline)
+        return eval(self.pipeline+".P_"+self.pipeline+"("+parameters+")")

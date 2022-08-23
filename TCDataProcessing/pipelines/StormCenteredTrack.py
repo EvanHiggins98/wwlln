@@ -2,7 +2,7 @@ from TCDataProcessing.scripts.scriptEngine import run_matlab_script
 from TCDataProcessing.scripts.python import trackfile
 import wwlln.scripts.file_io as file_io
 
-def P_StormCenteredTrack(trackfile_path,wwlln_path,output_path=''):
+def P_StormCenteredTrack(trackfile_path, wwlln_path, output_path=''):
     reduced_track = trackfile.navyToReduced(trackfile_path)
     if not output_path:
         output_path = str(file_io.get_parent(trackfile_path)) + r"\\Storm_Centered_Locations.txt"
