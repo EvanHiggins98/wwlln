@@ -8,7 +8,7 @@ from TCDataProcessing.models import Storm
 _REGIONS_NEW = ['AL',  'CP',   'EP',   'IO', 'SH',   'WP', 'LS']
 
 def index(request):
-    return render(request, 'TCFrontend/index.html', {'storms': Storm})
+    return render(request, 'TCFrontEnd/index.html', {'storms': Storm})
 
 def view_storm(request, season_num, region, storm_num):
     storm = get_object_or_404(Storm,
