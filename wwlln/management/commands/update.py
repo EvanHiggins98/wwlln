@@ -38,6 +38,9 @@ class Command(BaseCommand):
             find_new = options['find_new']
             update_all = options['u_all']
             update_sources = options['u_source']
+
+            _globalLogger.log_message("Beginning update with inputs: Region as {}, Season as {}, Storm as {}. FN: {} UA: {} US: {}"
+                .format(region, season_num, storm_num, find_new, update_all, update_sources), _globalLogger._DEBUG)
             
             if find_new:
                 storms.find_new_storms(region, season_num, storm_num)
@@ -64,7 +67,7 @@ class Command(BaseCommand):
             if update_sources:
                 storms.update_storm_resources(storms=storm_glob)
             
-            storms.update_storm_products(storms=storm_glob)
+            #storms.update_storm_products(storms=storm_glob)
             
         except Exception as e:
             raise CommandError('Command Error: {}'.format(e))
