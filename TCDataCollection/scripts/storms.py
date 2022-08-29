@@ -1,11 +1,14 @@
 import datetime
 import re
+#import resource
 from wwlln.scripts.file_io import create_path
 from wwlln.scripts.url_request import request_list_dir
 from TCDataCollection.models import Source, Resource
 from TCDataProcessing.models import Storm, Mission, Sensor
 from TCDataProcessing.models import Sensor
 from TCDataProcessing.scripts.python.trackfile import TrackFile
+from TCFrontEnd.models import Product
+from wwlln.scripts.custom_logging import _globalLogger
 
 
 _REGIONS_OLD = [ 'ATL', 'CPAC', 'EPAC', 'IO', 'SHEM', 'WPAC']
@@ -55,7 +58,8 @@ def find_new_storms(region=None, season_num=None,storm_num=None, date_range=None
                 if(not old_storms.filter(storm_number = cur_storm.storm_number).exists()):
                     cur_storm.save()
         else:
-            print('invalid listdir entry found: {} with attempted regex string: {}'.format(storm,r'[a-zA-z]{2}\d{6}'))
+            _globalLogger.log_message('invalid listdir entry found: {} with attempted regex string: {}'.format(storm,r'[a-zA-z]{2}\d{6}'), _globalLogger._ERROR)
+            #print('invalid listdir entry found: {} with attempted regex string: {}'.format(storm,r'[a-zA-z]{2}\d{6}'))
 
 def update_storm_info(storm,dir):
     track = TrackFile()
@@ -67,7 +71,7 @@ def update_storm_info(storm,dir):
     storm.date_end = track.get_end_date()
     storm.save()
 
-def update_storms(storms=None, resources=None):
+def update_storm_resources(storms=None, resources=None):
     if not resources:
         resources = Resource.objects.all()
     elif not isinstance(resources,list):
@@ -83,4 +87,15 @@ def update_storms(storms=None, resources=None):
                 dir = resource.collect(storm=storm,mission=sensor.mission,sensor=sensor,date_time=datetime.datetime.now())
                 if resource.name == 'trackfile' and dir:
                     update_storm_info(storm,dir)
-                
+
+def update_storm_products(storms=None, products=None):
+    if not products:
+        products = Product.objects.all()
+    elif not isinstance(products,list):
+        products = [products]
+    if not storms:
+        storms = Storm.objects.filter(is_complete=False)
+    elif not isinstance(storms,list):
+        storms = [storms]
+    
+    

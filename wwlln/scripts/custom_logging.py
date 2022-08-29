@@ -79,8 +79,11 @@ class CustomLogger:
     special flags to be implimented later
     """
     def log_message(self, message : str, priorityLevel : int = _DEBUG, special=None):
-        if self.printLevel < self._ALL:
+        if self.printLevel < self._ALL or priorityLevel < self._NONE:
             return
+        if priorityLevel == self._ALL:
+            priorityLevel = self.DEBUG
+        
         logging.log(priorityLevel, message)
         
         
