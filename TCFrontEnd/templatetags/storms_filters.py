@@ -95,10 +95,12 @@ def script_panel(storm, script):
 
 @register.inclusion_tag('TCFrontEnd/product_panel.html', name='product_panel')
 def product_panel(storm, product):
-    product_dir = product.get_relative_storage_path(storm)
+    product_dir = product.get_full_storage_path(storm)
     NO_DISPLAY = { 'has_images': False }
     # Make sure the directory exists.
+    print(file_io.ROOT_PATH)
     print(product_dir)
+    print(os.path.isdir(product_dir))
     if (os.path.isdir(product_dir)):
         ## Compile the pattern to look for GIF images.
         #gif_pattern = re.compile(r'.*\.gif')
