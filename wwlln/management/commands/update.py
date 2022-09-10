@@ -27,9 +27,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """
         Current operation if no storm info supplied:
-        -update ALL storms
-        TODO:
-        -Change default operation to only incompleate storms
+        -update only incompleate storms --Complete? NEEDS TESTING
         """
         try:
             region = options['region']
@@ -67,7 +65,7 @@ class Command(BaseCommand):
             if update_sources:
                 storms.update_storm_resources(storms=storm_glob)
             
-            #storms.update_storm_products(storms=storm_glob)
+            storms.update_storm_products(storms=storm_glob)
             
         except Exception as e:
             raise CommandError('Command Error: {}'.format(e))

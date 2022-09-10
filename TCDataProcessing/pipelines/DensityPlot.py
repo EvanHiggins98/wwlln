@@ -1,8 +1,22 @@
 from TCDataProcessing.scripts.scriptEngine import run_matlab_script
 from TCDataProcessing.scripts.python import trackfile
 import wwlln.scripts.file_io as file_io
+from TCDataCollection.models import Resource
+from TCDataProcessing.models import Storm, Sensor
 
-def P_DensityPlot(trackfile_path, wwlln_path, output_path='', output_filename='', storm_name=''):
+def P_DensityPlot(storm, resources, output_path):
+    #wwlln_path, output_filename=''
+    storm_name = storm.name
+    sensors = Sensor.objects.all()
+    for resource in resources:
+        for sensor in sensors:
+            dir = resource.collect(storm=storm, mission=sensor.mission, sensor=sensor)
+            if not dir:
+                continue
+            if resource.name == 'trackfile':
+                trackfile_path = file_io.create_path(dir,'trackfile.txt')
+            elif resource.name == 'locations':
+                wwlln_path = file_io.create_path(dir, '')
     reduced_track = trackfile.navyToReduced(trackfile_path)
     
     if not output_path:
