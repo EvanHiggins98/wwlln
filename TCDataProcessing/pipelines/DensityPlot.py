@@ -14,9 +14,11 @@ def P_DensityPlot(storm, resources, output_path):
             if not dir:
                 continue
             if resource.name == 'trackfile':
-                trackfile_path = file_io.create_path(dir,'trackfile.txt')
+                fileName = 'trackfile.txt'
+                trackfile_path = file_io.create_path(dir, fileName)
             elif resource.name == 'locations':
-                wwlln_path = file_io.create_path(dir, '')
+                fileName = "{Storm.region}_{Storm.season_number}_{Storm.storm_number:02d}_{Storm.name}_WWLLN_Locations.txt".format(Storm=storm)
+                wwlln_path = file_io.create_path(dir, fileName)
     reduced_track = trackfile.navyToReduced(trackfile_path)
     
     if not output_path:
