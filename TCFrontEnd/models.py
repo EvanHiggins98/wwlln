@@ -49,7 +49,8 @@ class Product(models.Model):
         return file_io.create_path(file_io.ROOT_PATH, self.STATIC_ROOT, self.STATIC_PRODUCT_PATH, str(storm.season_number), storm.region, str(storm.storm_number), self.path)
 
     def create(self, storm, resources):
-        parameters = 'r"{}", r"{}", '.format(storm, resources)
+        prodList = Product.objects.exclude(name = self.name)
+        parameters = 'r"{}", r"{}", r"{}", '.format(storm, resources, prodList)
         parameters += 'r"{}"'.format(self.get_full_storage_path(storm))
 
         exec("import " + self.STATIC_PIPELINE_PATH + self.pipeline)
