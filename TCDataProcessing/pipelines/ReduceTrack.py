@@ -5,7 +5,7 @@ from TCDataCollection.models import Resource
 from TCDataProcessing.models import Storm, Sensor
 from TCFrontEnd.models import Product
 
-def P_DensityPlot(storm, resources, products_IN, output_path, output_filename):
+def P_ReduceTrack(storm, resources, products_IN, output_path, output_filename):
     navy_track = None
     
     sensors = Sensor.objects.all()

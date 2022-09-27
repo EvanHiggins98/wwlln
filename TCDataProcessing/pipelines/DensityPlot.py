@@ -11,9 +11,9 @@ def P_DensityPlot(storm, resources, products_IN, output_path, output_filename):
     storm_name = storm.name
 
     for product in products_IN:
-        if product.name == 'reduced trackfile':
+        if product.name == 'reduced_trackfile':
             reduced_track = product.get_full_storage_path(storm)
-        elif product.name == 'reduced wwlln locations':
+        elif product.name == 'reduced_w_locations':
             wwlln_path = product.get_full_storage_path(storm)
     
     if not output_path:

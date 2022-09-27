@@ -9,6 +9,7 @@ from TCDataProcessing.models import Sensor
 from TCDataProcessing.scripts.python.trackfile import TrackFile
 from TCFrontEnd.models import Product
 from wwlln.scripts.custom_logging import _globalLogger
+from django.db.models import Q
 
 
 _REGIONS_OLD = [ 'ATL', 'CPAC', 'EPAC', 'IO', 'SHEM', 'WPAC']
@@ -98,4 +99,15 @@ def update_storm_products(storms=None, products=None):
     elif not isinstance(storms,list):
         storms = [storms]
     
-    
+    #change to references in products (eg: just the resources needed for that one pipeline)
+    priority_products = Q(name='reduced_trackfile') | Q(name='reduced_w_locations')
+    resources = Resource.objects.all()
+    for storm in storms:
+        #re-do this as a priority list or something better
+        #these have to be done first, otherwise the other products won't have the right files
+        for product in Product.objects.get(priority_products):
+            product.create(storm, resources)
+
+        for product in Product.objects.exclude(priority_products):
+            product.create(storm, resources)
+    return    
