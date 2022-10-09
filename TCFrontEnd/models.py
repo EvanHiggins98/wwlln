@@ -11,6 +11,7 @@ class Product(models.Model):
     _is_public = models.BooleanField(default=False)
     pipeline = models.TextField(null=True)
     filename_patern = models.TextField(null=True, default=None)
+    creation_priority = models.IntegerField(default=0)
 
     STATIC_PRODUCT_PATH = file_io.create_path('data','processed_data')
     STATIC_PIPELINE_PATH = file_io.create_path('TCDataProcessing', 'pipelines')

@@ -91,7 +91,7 @@ def update_storm_resources(storms=None, resources=None):
 
 def update_storm_products(storms=None, products=None):
     if not products:
-        products = Product.objects.all()
+        products = Product.objects.order_by('-creation_priority')
     elif not isinstance(products,list):
         products = [products]
     if not storms:
@@ -100,14 +100,8 @@ def update_storm_products(storms=None, products=None):
         storms = [storms]
     
     #change to references in products (eg: just the resources needed for that one pipeline)
-    priority_products = Q(name='reduced_trackfile') | Q(name='reduced_w_locations')
     resources = Resource.objects.all()
     for storm in storms:
-        #re-do this as a priority list or something better
-        #these have to be done first, otherwise the other products won't have the right files
-        for product in Product.objects.get(priority_products):
-            product.create(storm, resources)
-
-        for product in Product.objects.exclude(priority_products):
+        for product in products:
             product.create(storm, resources)
     return    
