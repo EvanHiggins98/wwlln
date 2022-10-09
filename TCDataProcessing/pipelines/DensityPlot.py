@@ -3,26 +3,21 @@ from TCDataProcessing.scripts.python import trackfile
 import wwlln.scripts.file_io as file_io
 from TCDataCollection.models import Resource
 from TCDataProcessing.models import Storm, Sensor
+from TCFrontEnd.models import Product
 
-def P_DensityPlot(storm, resources, output_path):
-    #wwlln_path, output_filename=''
+def P_DensityPlot(storm, resources, products_IN, output_path, output_filename):
+    reduced_track = None
+    wwlln_path = None
     storm_name = storm.name
-    sensors = Sensor.objects.all()
-    for resource in resources:
-        for sensor in sensors:
-            dir = resource.collect(storm=storm, mission=sensor.mission, sensor=sensor)
-            if not dir:
-                continue
-            if resource.name == 'trackfile':
-                fileName = 'trackfile.txt'
-                trackfile_path = file_io.create_path(dir, fileName)
-            elif resource.name == 'locations':
-                fileName = "{Storm.region}_{Storm.season_number}_{Storm.storm_number:02d}_{Storm.name}_WWLLN_Locations.txt".format(Storm=storm)
-                wwlln_path = file_io.create_path(dir, fileName)
-    reduced_track = trackfile.navyToReduced(trackfile_path)
+
+    for product in products_IN:
+        if product.name == 'reduced_trackfile':
+            reduced_track = product.get_full_storage_path(storm)
+        elif product.name == 'reduced_w_locations':
+            wwlln_path = product.get_full_storage_path(storm)
     
     if not output_path:
-        output_path = str(file_io.get_parent(trackfile_path))
+        output_path = str(file_io.get_parent(reduced_track))
     if not output_filename:
         output_filename = "Density_Plot.jpg"
     if not storm_name:

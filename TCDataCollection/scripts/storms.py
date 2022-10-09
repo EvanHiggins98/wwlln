@@ -9,6 +9,7 @@ from TCDataProcessing.models import Sensor
 from TCDataProcessing.scripts.python.trackfile import TrackFile
 from TCFrontEnd.models import Product
 from wwlln.scripts.custom_logging import _globalLogger
+from django.db.models import Q
 
 
 _REGIONS_OLD = [ 'ATL', 'CPAC', 'EPAC', 'IO', 'SHEM', 'WPAC']
@@ -90,7 +91,7 @@ def update_storm_resources(storms=None, resources=None):
 
 def update_storm_products(storms=None, products=None):
     if not products:
-        products = Product.objects.all()
+        products = Product.objects.order_by('-creation_priority')
     elif not isinstance(products,list):
         products = [products]
     if not storms:
@@ -98,4 +99,9 @@ def update_storm_products(storms=None, products=None):
     elif not isinstance(storms,list):
         storms = [storms]
     
-    
+    #change to references in products (eg: just the resources needed for that one pipeline)
+    resources = Resource.objects.all()
+    for storm in storms:
+        for product in products:
+            product.create(storm, resources)
+    return    
